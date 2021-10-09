@@ -23,7 +23,7 @@ def parseRequest(html, obor, okres):
         Parse a web page and find physician names and links for given medical field and location.
     """
 
-    names, towns, links, obory, okresy = [], [], [], [], []
+    names, municipalities, links, obory, okresy = [], [], [], [], []
     soup = BeautifulSoup(x.text, "html.parser")
     for table in soup.find_all('table', class_='seznam2'):
         for line in table.find_all("tr"):
@@ -33,16 +33,16 @@ def parseRequest(html, obor, okres):
                 name = cells[0].text.strip()
                 if name:
                     #TODO prazdne radky jako druhe mesto
-                    town = cells[1].text.strip()
+                    municipality = cells[1].text.strip()
                     link_ids = cells[2].find_all("a")
                     if link_ids: link_id = link_ids[0].attrs["href"]
                     else: link_id = ""
                     names.append(name)
-                    towns.append(town)
+                    municipalities.append(municipality)
                     links.append(link_id)
                     obory.append(obor)
                     okresy.append(okres)
-    return pd.DataFrame( {"names": names, "towns": towns, "links": links, "obory": obory, "okresy": okresy} )
+    return pd.DataFrame( {"name": names, "municipality": municipalities, "link": links, "medical_field": obory, "location": okresy} )
 
 url = "https://www.lkcr.cz/seznam-lekaru-426.html#seznam"
 url_base = "https://www.lkcr.cz"
