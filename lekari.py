@@ -66,5 +66,5 @@ for obor_code, okres_code in itertools.product( obor_codes.keys(), okres_codes.k
         print(url, obor, okres)
         df = parseRequest( x.text, obor, okres )
         dfs.append(df)
-        pd.concat( dfs ).to_csv("lekari.csv")
+        pd.concat( dfs ).reset_index(drop = True).to_csv("lekari.csv")
         time.sleep( sleep_interval )
