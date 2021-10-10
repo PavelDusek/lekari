@@ -54,8 +54,10 @@ def saveDoneCodes(done, done_csv, obor_code, okres_code):
     done.append( (obor_code, okres_code) )
     obor_codes  = [ obor_code  for (obor_code, okres_code) in done ]
     okres_codes = [ okres_code for (obor_code, okres_code) in done ]
+    #breakpoint()
     obor, okres = obor_codes[obor_code], okres_codes[okres_code]
     print("Recording this combination:", obor, okres)
+    #print("Recording this combination:", obor_code, okres_code)
     pd.DataFrame( {"obor_code": obor_codes, "okres_code": okres_codes} ).to_csv(done_csv)
     return done
 
@@ -71,7 +73,7 @@ if __name__ == "__main__":
         df = pd.read_csv(data_csv)
         dfs.append(df)
     if os.path.exists(done_csv):
-        done_df = pd.read_csv(done_csv)
+        done_df = pd.read_csv(done_csv).astype(str)
         done = list(zip( done_df['obor_code'], done_df['okres_code'] ))
 
     #do web scraping
