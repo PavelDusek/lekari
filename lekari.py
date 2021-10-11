@@ -52,9 +52,8 @@ def saveDoneCodes(done, done_csv, obor_code, okres_code):
     """
 
     done.append( (obor_code, okres_code) )
-    obor_codes  = [ obor_code  for (obor_code, okres_code) in done ]
-    okres_codes = [ okres_code for (obor_code, okres_code) in done ]
-    #breakpoint()
+    done_obor_codes  = [ obor_code  for (obor_code, okres_code) in done ]
+    done_okres_codes = [ okres_code for (obor_code, okres_code) in done ]
     obor, okres = obor_codes[obor_code], okres_codes[okres_code]
     print("Recording this combination:", obor, okres)
     #print("Recording this combination:", obor_code, okres_code)
